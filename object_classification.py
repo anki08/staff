@@ -2,7 +2,7 @@ import torch
 import torchvision
 from PIL import Image
 import json
-# class_idx = json.load(open("imagenet_class_index.json"))
+class_idx = json.load(open("imagenet_class_index.json"))
 
 I = Image.open('dog.jpg')
 model = torchvision.models.resnext101_32x8d(pretrained=True, progress=False)
@@ -14,6 +14,5 @@ transform = torchvision.transforms.Compose([
 
 model.eval()
 p = model(transform(I)[None])[0]
-print(p)
-# print( ' , '.join([class_idx[str(int(i))][1] for i in p.argsort(descending=True)[:5]]) )
-
+# print(p)
+print( ' , '.join([class_idx[str(int(i))][1] for i in p.argsort(descending=True)[:5]]) )
