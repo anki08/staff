@@ -5,6 +5,7 @@ import json
 class_idx = json.load(open("imagenet_class_index.json"))
 
 I = Image.open('dog.jpg')
+print(I)
 model = torchvision.models.resnext101_32x8d(pretrained=True, progress=False)
 transform = torchvision.transforms.Compose([
     torchvision.transforms.Scale(224),
@@ -14,5 +15,6 @@ transform = torchvision.transforms.Compose([
 
 model.eval()
 p = model(transform(I)[None])[0]
+print(model)
 # print(p)
 print( ' , '.join([class_idx[str(int(i))][1] for i in p.argsort(descending=True)[:5]]) )
